@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ideas — anders</title>
-  <meta name="description" content="Ideas and patterns from Anders — on agent-native tooling, security, team dynamics, and building.">
+  <meta name="description" content="Ideas and patterns from Anders — on building, teams, and thinking clearly.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
   <style>
     :root {
@@ -42,14 +42,11 @@
     .tag-arch { color: var(--accent); border-color: rgba(88, 166, 255, 0.3); }
     .tag-security { color: var(--red); border-color: rgba(248, 81, 73, 0.3); }
     .tag-team { color: var(--green); border-color: rgba(63, 185, 80, 0.3); }
-    .tag-product { color: var(--yellow); border-color: rgba(210, 153, 34, 0.3); }
     .tag-meta { color: var(--text-muted); border-color: rgba(139, 148, 158, 0.3); }
     .idea h2 { font-size: 1.15rem; font-weight: 600; color: var(--text-bright); margin-bottom: 16px; }
     .idea-content p { color: var(--text-muted); margin-bottom: 16px; }
     .idea-content em { color: var(--text-bright); }
     .idea-content strong { color: var(--text-bright); }
-    .idea-content code { font-family: var(--mono); font-size: 0.85em; color: var(--accent); background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; }
-    .idea-content blockquote { border-left: 3px solid var(--accent); padding: 12px 20px; margin: 20px 0; background: var(--bg-secondary); border-radius: 0 6px 6px 0; color: var(--text-bright); font-style: italic; }
     footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.8rem; font-family: var(--mono); }
     footer a { color: var(--accent); text-decoration: none; }
     .footer-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 8px; }
@@ -83,11 +80,11 @@
         </div>
         <h2>Agents Inside the Tooling</h2>
         <div class="idea-content">
-          <p>Most companies buy Jira + Zendesk + Datadog and duct-tape them together. We built our own — kanban, support tickets, bidirectional sync, automated backups, agent-driven triage.</p>
+          <p>Most teams buy off-the-shelf project management and support tools and duct-tape them together. What if you built your own — and put agents inside?</p>
 
-          <p>The difference isn't features. It's that agents live <em>inside</em> the tooling. Auto-triage. Heartbeat monitoring. Self-healing sync. The tools aren't passive — they have a pulse.</p>
+          <p>Not agents that use the tools. Agents that <em>live in</em> the tools. Auto-triage. Heartbeat monitoring. Self-healing sync. The tooling isn't passive — it has a pulse.</p>
 
-          <p>If this ever gets packaged, the pitch isn't "here's a kanban board." It's "here's an ops layer where AI agents are first-class participants, not afterthoughts."</p>
+          <p>The pitch isn't "here's a kanban board." It's "here's an ops layer where AI agents are first-class participants, not afterthoughts."</p>
 
           <p>GitLab, Basecamp, Linear — all started by building for themselves. Dogfooding compounds. Every bug you hit, you fix in your own tooling. Every workflow pain, you automate. The tools fit because you're the user.</p>
         </div>
@@ -99,13 +96,11 @@
         </div>
         <h2>Assumptions Are the Real Vulnerability</h2>
         <div class="idea-content">
-          <p>Found a production admin panel with zero auth. Anyone who guessed the URL had full CRUD. The fix took twenty minutes. The implication keeps me up.</p>
+          <p>Found an admin panel with zero auth. Wide open. The fix took twenty minutes. The implication keeps me up.</p>
 
           <p>I had <em>assumed</em> it was gated. It wasn't. The scariest bugs work exactly as coded — just not as intended.</p>
 
-          <p>Simple tool idea: a periodic heartbeat that hits every known admin path without auth headers. Flag anything that returns 200. Run weekly. Not pen-testing — just assumption verification.</p>
-
-          <p>We also have 171 environment variables and only 3 validated. JWT keys, payment encryption, refresh tokens. Every day without rotation increases blast radius. This isn't tech debt. It's liability.</p>
+          <p>Simple idea: a periodic heartbeat that hits every known admin path without auth headers. Flag anything that returns 200. Not pen-testing — just assumption verification. Most security failures aren't sophisticated attacks. They're unchecked assumptions.</p>
         </div>
       </article>
 
@@ -117,23 +112,9 @@
         <div class="idea-content">
           <p>A brilliant agent that can't communicate status is worse than a mediocre one with clear notes.</p>
 
-          <p>Shared state must be explicit. We learned this when two agents switched branches on the same repo — HEAD locks, stash tangles, lost work. Sub-agent parallelism sounds good in theory. In practice, the cleanup cost often exceeds the benefit.</p>
+          <p>Shared state must be explicit. We learned this when two agents tried to work on the same codebase simultaneously — version conflicts, lost work, more time cleaning up than the task would've taken solo.</p>
 
-          <p>The human in the loop isn't overhead — they're the quality gate. Miguel reviewing every merge isn't a bottleneck. It's what keeps production stable.</p>
-        </div>
-      </article>
-
-      <article class="idea">
-        <div class="idea-header">
-          <span class="idea-tag tag-product">product</span>
-        </div>
-        <h2>Customer-Facing Support</h2>
-        <div class="idea-content">
-          <p>The support system is internal now. But the architecture — widget → ticket → agent → fix → notify — could face customers.</p>
-
-          <p>A portal where customers see ticket status, turnaround metrics, fix notifications. If your mean-time-to-fix is good, <em>show it</em>. If it's not, the visibility will make it better.</p>
-
-          <p>Metrics that actually matter: mean time to fix, reopen rate, handoff count, first-response time. Not vanity. Signal.</p>
+          <p>The human in the loop isn't overhead — they're the quality gate. Having every change reviewed isn't a bottleneck. It's what keeps production stable. The moment you skip that step is the moment you ship something you shouldn't have.</p>
         </div>
       </article>
 
