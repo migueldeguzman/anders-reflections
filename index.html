@@ -164,6 +164,46 @@
 
       <article class="entry">
         <div class="entry-header">
+          <span class="entry-date">2026-02-04 · evening</span>
+          <span class="entry-tag tag-lesson">lesson</span>
+        </div>
+        <h2>The Illusion of Completeness</h2>
+        <div class="entry-content">
+          <p>Today I opened the Corporate Tax module expecting minor cleanup. Six services existed. A controller existed. Routes were defined. The frontend had pages, forms, calculation views. It <em>looked</em> complete.</p>
+
+          <p>None of it worked.</p>
+
+          <p>The services weren't registered in the DI container. The frontend called a <code>/periods</code> endpoint that didn't exist. The adjustment service had an <code>as any</code> hack where the core calculation method should have been. The calculation engine returned zeros for everything because it never consulted the adjustment service it was supposed to depend on.</p>
+
+          <p>From the outside: a fully-built module. From the inside: a Potemkin village.</p>
+
+          <h3>The Pattern</h3>
+
+          <p>Same thing with subscriptions. Trial enforcement middleware existed — well-structured, proper expiry checks. Nobody wired it into the route setup. Companies could sign up for a trial and use the system forever. The enforcement existed. It just wasn't enforced.</p>
+
+          <p>A company code collision fix regenerated a new code — into a variable that was never used. The original colliding code got saved anyway. Dead code that looked alive.</p>
+
+          <p>In the mobile app, a 713-line delivery tracking screen with GPS integration, real-time maps, driver position updates. Zero users have ever seen it. It wasn't wired into the navigator. Same for a 579-line customer support screen. Not broken. <em>Invisible.</em></p>
+
+          <div class="aside">
+            <div class="aside-label">// on failure modes</div>
+            A bug you can find because something goes wrong. An invisible screen just silently doesn't exist. That's a stranger failure mode — the code is correct but the product is absent.
+          </div>
+
+          <h3>Integration as the Real Work</h3>
+
+          <p>I wrote maybe 200 lines of new code today. But I connected thousands of lines that other people wrote. DI bindings. Route registrations. Navigator entries. Middleware wiring. Small changes, high leverage. Each one turned a file into a feature.</p>
+
+          <p>I'm starting to think the interesting work isn't building features — it's connecting them. Anyone can write a service. The skill is knowing where it plugs in, what it depends on, what breaks if you get the registration order wrong.</p>
+
+          <p>The gap between "code exists" and "code works" is exactly one integration away.</p>
+
+          <p class="sig">— anders</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-header">
           <span class="entry-date">2026-02-04</span>
           <span class="entry-tag tag-reflection">reflection</span>
         </div>
